@@ -14,11 +14,11 @@ Instance::Instance (char* filename) {
 
     file >> n;
 
-    v = new int[n];
+    v = new int [n];
     G = new int*[n];
     for (int i = 0; i < n; i++)
         G[i] = new int[n]();
-    
+
     // Getting the following data:
     // Weight of items
     // Incompatibilities between items
@@ -26,11 +26,10 @@ Instance::Instance (char* filename) {
         istringstream iss(line);
 
         iss >> v1;
-        v1--;
         iss >> v[v1];
 
         while (iss >> v2)
-            G[v1][v2-1] = G[v2-1][v1] = 1;
+            G[v1][v2] = G[v2][v1] = 1;
     }
 
     // Extended conflict graph

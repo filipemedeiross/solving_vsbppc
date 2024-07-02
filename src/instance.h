@@ -3,8 +3,8 @@
 
 class Instance {
     public:
-        int n;    // number of items
-        int* v;   // size of items
+        int   n;  // number of items
+        int*  v;  // size of items
         int** G;  // conflict graph
 
         Instance (char* filename);
