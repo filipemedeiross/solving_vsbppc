@@ -1,24 +1,38 @@
-# Set the compiler
+# Defining the constants
 CPPC = g++
 
-TARGET_EXEC := vsbppc.exe
-SRC_DIRS := src
+TARGET_EXEC   := vsbppc
+SRC_DIRS      := src
+BUILD_DIR     := build
 INSTANCE_DIRS := instances
 
-# Find all the C++ files we want to compile
-SRCS := $(shell dir /s /b $(SRC_DIRS)\*.cpp)
-
+# Find all the C++ files
+# Create a list of object files
 # Find all instances
-INSTANCES :=  $(shell dir /s /b $(INSTANCE_DIRS)\*.txt)
+SRCS      := $(shell find $(SRC_DIRS) -name '*.cpp')
+OBJS      := $(SRCS:$(SRC_DIRS)/%.cpp=$(BUILD_DIR)/%.o)
+INSTANCES := $(shell find $(INSTANCE_DIRS) -name '*.txt')
 
 # The final build step
-$(TARGET_EXEC):
-	$(CPPC) $(SRCS) -o $@
+$(TARGET_EXEC): $(OBJS)
+	$(CPPC) $(OBJS) -o $@
 
-run: $(INSTANCES) $(TARGET_EXEC)
-	$(foreach instance, $(INSTANCES), $(TARGET_EXEC) "$(instance)" &&) true
+# Rule to create object files
+$(BUILD_DIR)/%.o: $(SRC_DIRS)/%.cpp
+	$(CPPC) -c $< -o $@
+
+run_all: $(INSTANCES) $(TARGET_EXEC)
+	@for instance in $(INSTANCES); do                       \
+		BASENAME=$$(basename $$instance .txt);              \
+		INSTANCE_PART=$$(echo $$BASENAME | cut -d'_' -f3-); \
+                                                            \
+		echo "";                                            \
+		echo "***Running $$INSTANCE_PART***";               \
+                                                            \
+		./$(TARGET_EXEC) "$$instance";                      \
+	done
 
 clean:
-	del $(TARGET_EXEC)
+	rm -f $(TARGET_EXEC) $(OBJS)
 
 .DEFAULT_GOAL := $(TARGET_EXEC)
