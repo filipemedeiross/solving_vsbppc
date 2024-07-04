@@ -25,10 +25,8 @@ run_all: $(INSTANCES) $(TARGET_EXEC)
 	@for instance in $(INSTANCES); do                       \
 		BASENAME=$$(basename $$instance .txt);              \
 		INSTANCE_PART=$$(echo $$BASENAME | cut -d'_' -f3-); \
-                                                            \
 		echo "";                                            \
 		echo "***Running $$INSTANCE_PART***";               \
-                                                            \
 		./$(TARGET_EXEC) "$$instance";                      \
 	done
 
