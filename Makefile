@@ -6,7 +6,7 @@ SRC_DIRS      := src
 BUILD_DIR     := build
 INSTANCE_DIRS := instances
 
-# Find all the C++ files
+# Find all the .cpp files
 # Create a list of object files
 # Find all instances
 SRCS      := $(shell find $(SRC_DIRS) -name '*.cpp')
