@@ -2,7 +2,6 @@
 .vscode/
 
 # Directories
-instances/
 build/
 
 # Executable files
