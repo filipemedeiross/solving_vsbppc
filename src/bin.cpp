@@ -1,37 +1,10 @@
 #include <iostream>
+#include <algorithm>
 #include "bin.h"
 
 using namespace std;
 
-Bin::Bin (int bin_type) {
-    k = bin_type;
-    s = 0;
-    n = 0;
-}
-
-void Bin::add (int item, int size, int bin_type) {
-    s += size;
-    n++;
-    items.push_back(item);
-
-    if (k != bin_type)
-        k = bin_type;
-}
-
-void Bin::remove (int item, int size, int bin_type) {
-    std::list<int>::iterator pos;
-    
-    pos = items.begin();
-    while (*pos != item)
-        pos++;
-    
-    s -= size;
-    n--;
-    items.erase(pos);
-
-    if (k != bin_type)
-        k = bin_type;
-}
+Bin::Bin (int type) : k(type), s(0), n(0) {}
 
 int Bin::is_feasible(int* conflicts) {
     for (int item : items) 
@@ -41,11 +14,31 @@ int Bin::is_feasible(int* conflicts) {
     return 1;
 }
 
+void Bin::add (int item, int size, int type) {
+    s += size;
+    n++;
+    items.push_back(item);
+
+    k = type;
+}
+
+void Bin::remove (int item, int size, int type) {
+    auto pos = find(items.begin(),
+                    items.end()  ,
+                    item);
+
+    s -= size;
+    n--;
+    items.erase(pos);
+
+    k = type;
+}
+
 void Bin::describe () {
     cout << "(" << k << " - " << s << ") [ ";
-    
+
     for (int item : items)
         cout << item << " ";
-        
+
     cout << "]" << endl;
 }
