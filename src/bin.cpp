@@ -34,8 +34,11 @@ void Bin::remove (int item, int size, int type) {
     k = type;
 }
 
-void Bin::describe () {
-    cout << "(" << k << " - " << s << ") [ ";
+void Bin::describe (int b) {
+    cout << "Bin " << b << \
+            " ( "  << k << \
+            " - "  << s << \
+            " ) [ ";
 
     for (int item : items)
         cout << item << " ";

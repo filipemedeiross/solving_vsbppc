@@ -86,8 +86,6 @@ void Solution::describe () {
     cout << "Objective value = " << obj << endl;
 
     // Displays non-empty bins
-    for (int i = 0; i < n; i++) {
-        cout << "Bin " << i << " ";
-        S[i]->describe();
-    }
+    for (int i = 0; i < n; i++)
+        S[i]->describe(i);
 }

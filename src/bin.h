@@ -16,7 +16,7 @@ class Bin {
         void add    (int item, int size, int type);
         void remove (int item, int size, int type);
 
-        void describe ();
+        void describe (int b);
 };
 
 #endif
