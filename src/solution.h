@@ -14,6 +14,7 @@ class Solution {
         Bin* operator []  (int b);
         void copy (Solution& sol);
 
+        void clear ();
         Bin* new_bin   (int t);
         void erase_bin (int b);
 

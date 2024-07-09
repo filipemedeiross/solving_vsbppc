@@ -17,17 +17,26 @@ void Solution::copy (Solution& sol) {
     Bin *bin, *nbin;
 
     // Cleaning the bins
-    while (n) erase_bin(n-1);
+    clear();
 
     // Copying solution 'sol'
     for (int i = 0; i < sol.n; i++) {
-        bin = sol[i];
-
+        bin  = sol[i];
         nbin = new_bin(bin->k);
+
         nbin->s = bin->s;
         nbin->n = bin->n;
         for (int item : bin->items)
             nbin->items.push_back(item);
+    }
+}
+
+void Solution::clear () {
+    while (n) {
+        n--;
+        obj -= BIN_SIZE[S[n]->k];
+
+        delete S[n];
     }
 }
 
