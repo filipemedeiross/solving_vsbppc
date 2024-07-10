@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "initial_solution.h"
+#include "greedy.h"
 #include "tools.h"
 #include "neighborhood.h"
 #include "lnsa.h"

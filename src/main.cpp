@@ -5,7 +5,7 @@
 #include <cstring>
 #include "instance.h"
 #include "solution.h"
-#include "initial_solution.h"
+#include "greedy.h"
 #include "lnsa.h"
 
 #define FILE_OUT "out/results.txt"
