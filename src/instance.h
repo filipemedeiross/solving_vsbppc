@@ -9,6 +9,7 @@ class Instance {
 
         Instance (char* filename);
 
+        int  operator [] (int);
         void describe ();
 };
 

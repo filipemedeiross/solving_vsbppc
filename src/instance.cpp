@@ -41,6 +41,10 @@ Instance::Instance (char* filename) {
     file.close();
 }
 
+int Instance::operator [] (int i) {
+    return v[i];
+}
+
 // Printing the instance description
 void Instance::describe () {
     cout << "Number of items = " << n << endl;
