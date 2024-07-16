@@ -1,26 +1,21 @@
-#include <cstdlib>
+#include <random>
 #include "tools.h"
 
 using namespace std;
 
 vector <int>* destroy_solution (Solution& sol, float p) {
-    int bin;
-    double test;
     vector <int>* V = new vector <int>();
-    
-    bin = 0;
-    while (bin < sol.n) {
-        test = static_cast<double>(rand()) / RAND_MAX;
 
-        if (test <= p) {
-            for (int item : sol[bin]->items)
-                V->push_back(item);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> dis(0.0, 1.0);
 
-            sol.erase_bin(bin);
-        } else {
+    int bin = 0;
+    while (bin < sol.n)
+        if (dis(gen) > p)
             bin++;
-        }
-    }
+        else
+            sol.reloc_bin(bin, V);
 
     return V;
 }

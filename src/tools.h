@@ -4,6 +4,8 @@
 #include <vector>
 #include "solution.h"
 
-std::vector <int>* destroy_solution (Solution&, float);
+using namespace std;
+
+vector <int>* destroy_solution (Solution&, float);
 
 #endif
