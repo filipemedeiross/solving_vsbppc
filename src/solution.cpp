@@ -63,6 +63,13 @@ void Solution::erase_bin (int b) {
     }
 }
 
+void Solution::reloc_bin (int b, vector <int>* V) {
+    for (int item : S[b]->items)
+        V->push_back(item);
+
+    erase_bin(b);
+}
+
 void Solution::alloc (int b, int t, int i, int s) {
     int k = S[b]->k;
 

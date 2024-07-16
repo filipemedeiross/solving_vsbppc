@@ -1,7 +1,10 @@
 #ifndef SOLUTION_H
 #define SOLUTION_H
 
+#include <vector>
 #include "bin.h"
+
+using namespace std;
 
 class Solution {
     public:
@@ -17,6 +20,7 @@ class Solution {
         void clear ();
         Bin* new_bin   (int t);
         void erase_bin (int b);
+        void reloc_bin (int b, vector <int>* V);
 
         void alloc    (int b, int t, int i, int s);
         void dealloc  (int b, int t, int i, int s);
