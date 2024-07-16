@@ -81,14 +81,18 @@ void Solution::dealloc (int b, int t, int i, int s) {
     S[b]->remove(i, s, t);
 }
 
-void Solution::reinsert (int b1, int b2, int t1, int t2, int i, int s) {
+int Solution::reinsert (int b1, int b2, int t1, int t2, int i, int s) {
     dealloc(b1, t1, i, s);
     alloc  (b2, t2, i, s);
+
+    return i;
 }
 
-void Solution::swap (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int s2) {
+int Solution::swap (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int s2) {
     reinsert(b1, b2, t1, t2, i1, s1);
     reinsert(b2, b1, t2, t1, i2, s2);
+
+    return i2;
 }
 
 void Solution::describe () {
