@@ -14,6 +14,14 @@ int Bin::is_feasible(int* conflicts) {
     return 1;
 }
 
+int Bin::is_feasible(int* conflicts, int rm) {
+    for (int item : items) 
+        if (item != rm && conflicts[item])
+            return 0;
+
+    return 1;
+}
+
 void Bin::add (int item, int size, int type) {
     s += size;
     n++;

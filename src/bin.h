@@ -10,13 +10,15 @@ class Bin {
         int n;  // number of items in the bin
         std::list <int> items;
 
-        Bin (int type);
+        Bin (int);
 
-        int  is_feasible (int* conflicts);
-        void add    (int item, int size, int type);
-        void remove (int item, int size, int type);
+        int  is_feasible (int*);
+        int  is_feasible (int*, int);
 
-        void describe (int b);
+        void add    (int, int, int);
+        void remove (int, int, int);
+
+        void describe (int);
 };
 
 #endif
