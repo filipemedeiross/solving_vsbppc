@@ -9,7 +9,7 @@
 #include "lnsa.h"
 
 #define FILE_OUT "out/results.txt"
-#define MAX_ITER 5000
+#define PATIENCE 500
 #define VERBOSE 0
 #define P 0.25
 
@@ -44,7 +44,7 @@ int main (int argc, char** argv) {
 
     // LNSA
     start = high_resolution_clock::now();
-    Solution *best_solution = lnsa(instance, MAX_ITER, VERBOSE, P);
+    Solution *best_solution = lnsa(instance, PATIENCE, VERBOSE, P);
     stop = high_resolution_clock::now();
 
     time = duration_cast<seconds>(stop - start).count();
