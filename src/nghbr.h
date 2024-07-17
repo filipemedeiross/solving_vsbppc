@@ -17,4 +17,6 @@ int reinsertion (Solution&, int, int*, int**);
 
 int swap (Solution&, int, int*, int**);
 
+int search (Solution&, int, int*, int**);
+
 #endif

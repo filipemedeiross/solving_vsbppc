@@ -153,3 +153,8 @@ int swap (Solution& sol, int n, int* v, int** G) {
 
     return 0;
 }
+
+int search (Solution& sol, int n, int* v, int** G) {
+    return reinsertion(sol, n, v, G) || \
+           swap       (sol, n, v, G);
+}
