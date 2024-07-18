@@ -43,5 +43,7 @@ Solution* lnsa (Instance& instance, int patience, int verbose, float p) {
         delete V;
     }
 
+    delete sol;
+
     return best;
 }

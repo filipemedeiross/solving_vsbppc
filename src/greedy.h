@@ -21,6 +21,7 @@ class Greedy {
         Instance* instance;
 
         Greedy (Instance*);
+        ~Greedy ();
 
         Solution* initial_solution ();
 

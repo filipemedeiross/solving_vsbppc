@@ -21,6 +21,11 @@ Greedy::Greedy (Instance* new_instance) : instance(new_instance),
     }
 }
 
+Greedy::~Greedy () {
+    delete[] new_type;
+    delete[] new_cost;
+}
+
 Solution* Greedy::initial_solution () {
     Solution* solution = new Solution (instance->n);
 
