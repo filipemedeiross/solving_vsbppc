@@ -3,6 +3,7 @@
 
 # Directories
 build/
+out/
 
 # Executable files
 vsbppc
