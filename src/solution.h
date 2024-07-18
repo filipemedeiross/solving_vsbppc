@@ -13,6 +13,7 @@ class Solution {
         Bin** S;  // bins reference
 
         Solution (int bins);
+        ~Solution ();
 
         Bin* operator []  (int b);
         void copy (Solution& sol);

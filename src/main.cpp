@@ -9,7 +9,7 @@
 #include "lnsa.h"
 
 #define FILE_OUT "out/results.txt"
-#define PATIENCE 3000
+#define PATIENCE 1000
 #define VERBOSE  0
 #define P        0.25
 
@@ -58,6 +58,9 @@ int main (int argc, char** argv) {
     cout << endl;
     cout << "Final solution:" << endl;
     best_solution->describe();
+
+    delete greedy_solution;
+    delete best_solution;
 
     return 0;
 }

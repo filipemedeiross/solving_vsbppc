@@ -41,6 +41,15 @@ Instance::Instance (char* filename) {
     file.close();
 }
 
+Instance::~Instance () {
+    delete[] v;
+
+    for (int i = 0; i < n; i++)
+        delete[] G[i];
+
+    delete[] G;
+}
+
 int Instance::operator [] (int i) {
     return v[i];
 }

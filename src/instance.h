@@ -8,6 +8,7 @@ class Instance {
         int** G;  // conflict graph
 
         Instance (char* filename);
+        ~Instance ();
 
         int  operator [] (int);
         void describe ();

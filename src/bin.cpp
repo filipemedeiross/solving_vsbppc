@@ -6,6 +6,10 @@ using namespace std;
 
 Bin::Bin (int type) : k(type), s(0), n(0) {}
 
+Bin::~Bin () {
+    items.clear();
+}
+
 int Bin::is_feasible(int* conflicts) {
     for (int item : items) 
         if (conflicts[item])

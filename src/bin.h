@@ -11,6 +11,7 @@ class Bin {
         std::list <int> items;
 
         Bin (int);
+        ~Bin ();
 
         int  is_feasible (int*);
         int  is_feasible (int*, int);

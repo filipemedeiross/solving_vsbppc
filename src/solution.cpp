@@ -6,6 +6,12 @@ using namespace std;
 
 Solution::Solution (int bins) : n(0), obj(0), S(new Bin*[bins]) {}
 
+Solution::~Solution () {
+    clear();
+
+    delete S;
+}
+
 Bin* Solution::operator [] (int b) {
     if (b < n)
         return S[b];
