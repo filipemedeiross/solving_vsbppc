@@ -1,4 +1,0 @@
-instances/set1_100/Correia_Random_1_2_8_10.txt 5770 0 5450 5
-instances/set1_100/Correia_Random_1_2_8_10.txt 5770 0 5450 5
-instances/set1_100/Correia_Random_1_2_8_10.txt 5770 0 5450 5
-instances/set1_100/Correia_Random_1_2_8_10.txt 5770 0 5420 5
