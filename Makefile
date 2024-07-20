@@ -28,9 +28,9 @@ run_all: $(INSTANCES) $(TARGET_EXEC)
 		echo "";                                            \
 		echo "***Running $$INSTANCE_PART***";               \
 		if [ -z "$(OUTPUT_FILE)" ]; then                    \
-			./$(TARGET_EXEC) "$$instance";                  \
+            ./$(TARGET_EXEC) "$$instance";                  \
 		else                                                \
-			./$(TARGET_EXEC) "$$instance" "$(OUTPUT_FILE)"; \
+            ./$(TARGET_EXEC) "$$instance" "$(OUTPUT_FILE)"; \
 		fi;                                                 \
 	done
 
