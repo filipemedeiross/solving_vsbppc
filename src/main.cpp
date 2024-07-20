@@ -8,7 +8,7 @@
 #include "greedy.h"
 #include "lnsa.h"
 
-#define FILE_OUT "out/results.txt"
+#define FILE_OUT "out/results_default.txt"
 #define PATIENCE 1000
 #define VERBOSE  0
 #define P        0.25
@@ -17,8 +17,8 @@ using namespace std;
 using namespace std::chrono;
 
 int main (int argc, char** argv) {
-    if (argc != 2) {
-        cout << "Using: ./vsbppc <file_instance>" << endl;
+    if (argc < 2) {
+        cout << "Using: ./vsbppc <file_instance> [file_results]" << endl;
 		return -1;
 	}
 
@@ -30,7 +30,7 @@ int main (int argc, char** argv) {
 
     int time;
     time_point<high_resolution_clock> start, stop;
-    ofstream write_file(FILE_OUT, ios_base::app);
+    ofstream write_file(argc == 3 ? argv[2] : FILE_OUT, ios_base::app);
 
     // Greedy algorithm
     start = high_resolution_clock::now();

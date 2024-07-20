@@ -27,7 +27,11 @@ run_all: $(INSTANCES) $(TARGET_EXEC)
 		INSTANCE_PART=$$(echo $$BASENAME | cut -d'_' -f3-); \
 		echo "";                                            \
 		echo "***Running $$INSTANCE_PART***";               \
-		./$(TARGET_EXEC) "$$instance";                      \
+		if [ -z "$(OUTPUT_FILE)" ]; then                    \
+			./$(TARGET_EXEC) "$$instance";                  \
+		else                                                \
+			./$(TARGET_EXEC) "$$instance" "$(OUTPUT_FILE)"; \
+		fi;                                                 \
 	done
 
 clean:

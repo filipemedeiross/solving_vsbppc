@@ -1,9 +1,11 @@
 # Environments
 .vscode/
 
+# Files
+out/results_default.txt
+
 # Directories
 build/
-out/
 
 # Executable files
 vsbppc
