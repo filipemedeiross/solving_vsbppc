@@ -4,7 +4,7 @@ CPPC = g++
 TARGET_EXEC   := vsbppc
 SRC_DIRS      := src
 BUILD_DIR     := build
-INSTANCE_DIRS := instances/set1_100
+INSTANCE_DIRS := instances/train
 
 # Find all the C++ files
 # Create a list of object files
