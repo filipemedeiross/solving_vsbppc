@@ -27,6 +27,7 @@ def eval(file1, file2):
     print('Best in      =', len(best2))
     print('Relative gap =', sum(best2.obj1 - best2.obj2))
 
+
 if __name__ == "__main__":
     if len(sys.argv) == 3:
         eval(sys.argv[1], sys.argv[2])
