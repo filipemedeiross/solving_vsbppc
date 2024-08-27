@@ -73,16 +73,18 @@ void Greedy::find_best (Solution& sol, vector <int>& V, int& bi, int& bt, int& b
         for (t = 0; t < sol.n; t++) {
             bin = sol[t];
 
-            for (k = 0; k < BIN_TYPES; k++) {
+            for (k = bin->k; k < BIN_TYPES; k++) {
                 if (instance->v[item] + bin->s <= BIN_SIZE[k] && bin->is_feasible(instance->G[item])) {
                     if (k == bin->k)
                         cost = (float) BIN_SIZE[k] / (instance->v[item] + bin->s) - 1;
                     else
                         cost = (float) (BIN_SIZE[k] - BIN_SIZE[bin->k]) / instance->v[item];
 
-                    if (cost < bcost) 
+                    if (cost < bcost)
                         update_best(bi, bt, bk, bcost,
                                     i , t , k , cost );
+
+                    break;
                 }
             }
         }
