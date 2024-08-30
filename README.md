@@ -21,27 +21,27 @@ Exemplifying its application, this problem models a scenario where multiple file
 
 The mathematical model for the VSBPPC minimizes the total cost of the bins used, considering both the size of the bins and the conflicts between items. We present the integer programming model found in Ekici (2023):
 
-**Decision Variables**:
+**Decision Variables**
 
-If item $i$ is packed into bin $t$:
+If item $i$ is packed into bin $t$,
 
 $$
 x_{it},   i \in V, t \in N
 $$
 
-If bin $t$ is a type $k$ bin:
+If bin $t$ is a type $k$ bin,
 
 $$
 y_{tk},   t \in N, k \in B
 $$
 
-**Objective Function**:
+**Objective Function**
 
 $$
 Min \sum\limits_{t \in N} \sum\limits_{k \in B} C_{k}y_{tk}
 $$
 
-**Subject to**:
+**Subject to**
 
 $$
 \sum\limits_{i \in V}v_{i}x_{it} \leq \sum\limits_{k \in B}W_{k}y_{tk},   \forall t \in N
