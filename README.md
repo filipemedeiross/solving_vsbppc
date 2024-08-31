@@ -15,7 +15,7 @@ This problem has the following variants:
 
 In this work, we will focus on the **Variable Sized Bin Packing Problem with Conflicts** (VSBPPC, which generalizes the BPP, BPPC and VSBPP), this problem involves packing items into bins of varying sizes while considering conflicts between certain items. The VSBPPC presents additional challenges, including selecting appropriate bin sizes, minimizing total costs and ensuring that conflicting items are not packed together, as a result it is a more complex and comprehensive problem.
 
-In general, a problem instance must first specify the number of items to be packed and, for each item, it then details its size and the indices of other items that conflict with it. The size and cost of the available bins are separate from the problem instance and should be specified independently. The test instances are in the format "Correia_Random_x_y_z_t.txt" and follow the specifications below:
+In general, a problem instance must first specify the number of items to be packed and, for each item, it then details its size and the indices of other items that conflict with it. The size and cost of the available bins are separate from the problem instance and should be specified independently. The test instances follow the specifications below:
 
 1. **x** specifies the number of items in the instance:
    - $1 \rightarrow 100$
@@ -44,6 +44,8 @@ Exemplifying its application, this problem models a scenario where multiple file
 <p align="center"> 
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vsbppc_application.png?raw=true" width="500" height="350">
 </p>
+
+> **Obs**.: The instances are in the format "Correia_Random_x_y_z_t.txt".
 
 ## Modeling as Integer Programming
 
