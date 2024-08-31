@@ -30,13 +30,13 @@ The mathematical model for the VSBPPC minimizes the total cost of the bins used,
 If item $i$ is packed into bin $t$,
 
 $$
-x_{it},   i \in V, t \in N
+x_{it}, \quad i \in V, t \in N
 $$
 
 If bin $t$ is a type $k$ bin,
 
 $$
-y_{tk},   t \in N, k \in B
+y_{tk}, \quad t \in N, k \in B
 $$
 
 **Objective Function**
@@ -48,31 +48,31 @@ $$
 **Subject to**
 
 $$
-\sum\limits_{i \in V}v_{i}x_{it} \leq \sum\limits_{k \in B}W_{k}y_{tk},   \forall t \in N
+\sum\limits_{i \in V}v_{i}x_{it} \leq \sum\limits_{k \in B}W_{k}y_{tk}, \quad t \in N
 $$
 
 $$
-\sum\limits_{t \in N}x_{it} = 1,   \forall i \in V
+\sum\limits_{t \in N}x_{it} = 1, \quad i \in V
 $$
 
 $$
-\sum\limits_{k \in B}y_{tk} \leq 1,   \forall t \in N
+\sum\limits_{k \in B}y_{tk} \leq 1, \quad t \in N
 $$
 
 $$
-x_{it} + x_{jt} \leq \sum\limits_{k \in B}y_{tk},   \forall (i, j) \in E, \forall t \in N
+x_{it} + x_{jt} \leq \sum\limits_{k \in B}y_{tk}, \quad (i, j) \in E, t \in N
 $$
 
 $$
-\sum\limits_{i \in V}v_{i}x_{i,t-1} \geq \sum\limits_{i \in V}v_{i}x_{it},   \forall t \in N\setminus\set{1}
+\sum\limits_{i \in V}v_{i}x_{i,t-1} \geq \sum\limits_{i \in V}v_{i}x_{it}, \quad t \in N\setminus\set{1}
 $$
 
 $$
-x_{it} \in \set{0, 1}, \forall i \in V, \forall t \in N
+x_{it} \in \set{0, 1}, \forall i \in V, \quad t \in N
 $$
 
 $$
-y_{tk} \in \set{0, 1}, \forall t \in N, \forall k \in B
+y_{tk} \in \set{0, 1}, \forall t \in N, \quad k \in B
 $$
 
 ## References
