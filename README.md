@@ -14,7 +14,7 @@ In this work, we will focus on the **Variable Sized Bin Packing Problem with Con
 Exemplifying its application, this problem models a scenario where multiple files must be stored across a heterogeneous network of computers, each with different storage capacities and other specifications. The goal is to minimize the number of machines used while implementing a fault tolerance mechanism that involves duplicating critical files and ensuring that these duplicates, which create conflicts, are assigned to separate machines:
 
 <p align="center"> 
-    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vsbppc_application.png?raw=true" width="500" height="350">
+    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vsbppc_application.png?raw=true" width="550" height="350">
 </p>
 
 ## Modeling as Integer Programming
