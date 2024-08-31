@@ -127,6 +127,53 @@ for (v1 = 0; v1 < n-1; v1++)
 (...)
 ```
 
+## Solution
+
+In the solution, each bin is represented by an instance of the `Bin` class, which maintains key attributes: the bin type $k$ and the items it contains. To minimize recalculations, the attribute $s$ records the current used capacity, while the attribute $n$ keeps track of the number of items in the bin.
+
+A list of items was chosen because constant-time insertion and removal operations are crucial during the optimization phase. Conversely, scanning operations are more frequently used, whereas retrieval operations are not employed.
+
+```cpp
+class Bin {
+    public:
+        int k;  // bin type
+        int s;  // capacity used
+        int n;  // number of items in the bin
+        std::list <int> items;
+
+        (...)
+```
+
+A solution is represented by an instance of the `Solution` class, which manages a collection of bins. To improve efficiency, it tracks the number of bins and the current value of the objective function:
+
+```cpp
+class Solution {
+    public:
+        int   n;  // number of bins
+        int obj;  // objective value
+        Bin** S;  // bins reference
+
+        (...)
+```
+
+The bins are organized using a pointer-to-pointer structure of `Bin`, allocated with a maximum capacity corresponding to the number of items, which serves as an upper bound for the number of bins. This design avoids the need for dynamic memory allocation associated with the `Vector` container and enables constant-time retrieval of each bin, though it requires a small amount of extra memory for pointers:
+
+<p align="center"> 
+    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/solution.png?raw=true" width="400" height="200">
+</p>
+
+Another advantage of the `Bin** S` data structure is the flexibility it provides for implementing the deletion operation. The `Vector` container assumes that the order of elements is important, so removing an element from the middle of the vector involves shifting the subsequent elements to maintain order:
+
+<p align="center"> 
+    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vector_erase.png?raw=true" width="400" height="30">
+</p>
+
+However, for the problem at hand, the order of the bins is not important; we only need to know the type of each bin and the items it contains. Therefore, we can remove an element from the middle of the vector, replacing its pointer with the last element's pointer and then using a null pointer to eliminate redundancy at the end. By adopting this method, we decrease the complexity of the bin removal operation from linear to constant time:
+
+<p align="center"> 
+    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/erase_bin.png?raw=true" width="400" height="200">
+</p>
+
 ## References
 
 Cabral, Lucídio dos Anjos Formiga. **Introdução à Pesquisa Operacional**. UFPB/CCEN/DE, Julho 1996.
