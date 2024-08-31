@@ -64,11 +64,11 @@ $$
 $$
 
 $$
-x_{it} \in \set{0, 1}, \forall i \in V, \quad t \in N
+x_{it} \in \set{0, 1}, \quad i \in V, t \in N
 $$
 
 $$
-y_{tk} \in \set{0, 1}, \forall t \in N, \quad k \in B
+y_{tk} \in \set{0, 1}, \quad t \in N, k \in B
 $$
 
 ## Instances
