@@ -45,7 +45,7 @@ Exemplifying its application, this problem models a scenario where multiple file
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vsbppc_application.png?raw=true" width="500" height="350">
 </p>
 
-> **Obs**.: The instances are in the format "Correia_Random_x_y_z_t.txt".
+> **Note**.: The instances are in the format "Correia_Random_x_y_z_t.txt".
 
 ## Modeling as Integer Programming
 
