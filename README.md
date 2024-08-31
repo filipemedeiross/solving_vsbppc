@@ -21,6 +21,8 @@ Exemplifying its application, this problem models a scenario where multiple file
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/vsbppc_application.png?raw=true" width="500" height="350">
 </p>
 
+## Modeling as Integer Programming
+
 The mathematical model for the VSBPPC minimizes the total cost of the bins used, considering both the size of the bins and the conflicts between items. We present the integer programming model found in Ekici (2023):
 
 **Decision Variables**
