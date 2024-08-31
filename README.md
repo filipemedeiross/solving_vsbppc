@@ -6,7 +6,9 @@ Application of heuristics to solve the variable-size bin packing problem with co
 
 ## Introduction
 
-The **Bin Packing Problem** (BPP) is a combinatorial optimization problem that involves packing a set of items of varying sizes into a finite number of bins, each with a fixed capacity. The objective is to minimize the number of bins used while ensuring that the total size of the items in each bin does not exceed its capacity, this problem has the following variants:
+The **Bin Packing Problem** (BPP) is a combinatorial optimization problem that involves packing a set of items of varying sizes into a finite number of bins, each with a fixed capacity. The objective is to minimize the number of bins used while ensuring that the total size of the items in each bin does not exceed its capacity.
+
+This problem has the following variants:
 
 1. **Bin Packing Problem with Conflicts** (BPPC): in this variant certain items cannot be packed together due to conflicts, the objective remains to minimize the number of bins used while respecting these conflicts.
 2. **Variable Sized Bin Packing Problem** (VSBPP): this variant involves bins of different capacities, the goal is to minimize the total cost associated with the bins used taking into account their varying sizes.
