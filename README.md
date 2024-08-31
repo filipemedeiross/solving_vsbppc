@@ -73,7 +73,7 @@ $$
 
 ## Instances
 
-In general, a problem instance must first specify the number of items to be packed and, for each item, it then details its size and the indices of other items that conflict with it. The size and cost of the available bins are separate from the problem instance and should be specified independently. The test instances follow the specifications below:
+In general, a problem instance must first specify the number of items to be packed and, for each item, it then details its size and the indices of other items that conflict with it. The test instances follow the specifications below:
 
 1. **x** specifies the number of items in the instance:
    - $1 \rightarrow 100$
@@ -97,7 +97,9 @@ In general, a problem instance must first specify the number of items to be pack
     - $11 \rightarrow 0.99$
 4. **t** specifies the instance number.
 
-> **Note**.: The instances are in the format "Correia_Random_x_y_z_t.txt".
+> **Note 1**.: The instances are in the format "Correia_Random_x_y_z_t.txt".
+
+> **Note 2**.: The size and cost of the available bins are separate from the problem instance and should be specified independently.
 
 To represent problem instances on the computer, the Instance class was designed to encapsulate key problem attributes, including item weights and their conflict graph. Additionally, the total number of items is stored as an attribute, this design choice enhances efficiency with minimal memory overhead by eliminating the need to traverse data structures to determine the number of elements during each iteration:
 
