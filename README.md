@@ -156,7 +156,7 @@ class Solution {
         (...)
 ```
 
-The bins are organized using a pointer-to-pointer structure of `Bin`, allocated with a maximum capacity corresponding to the number of items, which serves as an upper bound for the number of bins. This design avoids the need for dynamic memory allocation associated with the `Vector` container and enables constant-time retrieval of each bin, though it requires a small amount of extra memory for pointers.
+The bins are organized using a pointer-to-pointer structure of `Bin`, allocated with a maximum capacity corresponding to the number of items, which serves as an upper bound for the number of bins. This design avoids the need for dynamic memory allocation associated with the `Vector` container, while still allowing constant-time retrieval of each bin, though it requires a small amount of extra memory for pointers.
 
 <p align="center">
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/solution.png?raw=true" width="400" height="200">
