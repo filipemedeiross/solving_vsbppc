@@ -171,7 +171,7 @@ Another advantage of the `Bin** S` data structure is the flexibility it provides
 However, for the problem at hand, the order of the bins is not important; we only need to know the type of each bin and the items it contains. Therefore, we can remove an element from the middle of the vector, replacing its pointer with the last element's pointer and then using a null pointer to eliminate redundancy at the end. By adopting this method, we decrease the complexity of the bin removal operation from linear to constant time.
 
 <p align="center">
-    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/erase_bin.png?raw=true" width="300" height="200">
+    <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/erase_bin.png?raw=true" width="400" height="150">
 </p>
 
 ## References
