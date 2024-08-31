@@ -101,7 +101,7 @@ In general, a problem instance must first specify the number of items to be pack
 
 > **Note 2**.: The size and cost of the available bins are separate from the problem instance and should be specified independently.
 
-To represent problem instances on the computer, the Instance class was designed to encapsulate key problem attributes, including item weights and their conflict graph. Additionally, the total number of items is stored as an attribute, this design choice enhances efficiency with minimal memory overhead by eliminating the need to traverse data structures to determine the number of elements during each iteration:
+To represent problem instances on the computer, the `Instance` class was designed to encapsulate key problem attributes, including item weights and their conflict graph. Additionally, the total number of items is stored as an attribute, this design choice enhances efficiency with minimal memory overhead by eliminating the need to traverse data structures to determine the number of elements during each iteration:
 
 ```cpp
 class Instance {
