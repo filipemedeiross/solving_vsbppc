@@ -15,6 +15,30 @@ This problem has the following variants:
 
 In this work, we will focus on the **Variable Sized Bin Packing Problem with Conflicts** (VSBPPC, which generalizes the BPP, BPPC and VSBPP), this problem involves packing items into bins of varying sizes while considering conflicts between certain items. The VSBPPC presents additional challenges, including selecting appropriate bin sizes, minimizing total costs and ensuring that conflicting items are not packed together, as a result it is a more complex and comprehensive problem.
 
+In general, a problem instance must first specify the number of items to be packed and, for each item, it then details its size and the indices of other items that conflict with it. The size and cost of the available bins are separate from the problem instance and should be specified independently. The test instances are in the format "Correia_Random_x_y_z_t.txt" and follow the specifications below:
+
+1. **x** specifies the number of items in the instance:
+   - $1 \rightarrow 100$
+   - $2 \rightarrow 200$
+2. **y** specifies the interval from which the item sizes are generated:
+   - $1 \rightarrow [ 1, 100]$
+   - $2 \rightarrow [20, 100]$
+   - $3 \rightarrow [50, 100]$
+3. **z** specifies the average conflict graph density:
+    - $0 \rightarrow  0.0$
+    - $1 \rightarrow  0.1$
+    - $2 \rightarrow  0.2$
+    - $3 \rightarrow  0.3$
+    - $4 \rightarrow  0.4$
+    - $5 \rightarrow  0.5$
+    - $6 \rightarrow  0.6$
+    - $7 \rightarrow  0.7$
+    - $8 \rightarrow  0.8$
+    - $9 \rightarrow  0.9$
+    - $10 \rightarrow 0.95$
+    - $11 \rightarrow 0.99$
+4. **t** specifies the instance number.
+
 Exemplifying its application, this problem models a scenario where multiple files must be stored across a heterogeneous network of computers, each with different storage capacities and other specifications, with the objective of minimizing the number of machines used while implementing a fault tolerance mechanism that involves duplicating critical files and ensuring that these duplicates, which create conflicts, are assigned to separate machines:
 
 <p align="center"> 
