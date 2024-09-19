@@ -109,6 +109,7 @@ class Instance {
         int   n;  // number of items
         int*  v;  // size of items
         int** G;  // conflict graph
+        float d;  // conflict graph density
 
         (...)
 ```
