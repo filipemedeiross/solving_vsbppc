@@ -8,7 +8,7 @@ using namespace std;
 
 // Reading an instance from a file
 Instance::Instance (char* filename) {
-    int v1, v2;
+    int v1, v2, edges = 0;
     string line;
     ifstream file(filename);
 
@@ -28,8 +28,12 @@ Instance::Instance (char* filename) {
         iss >> v1;
         iss >> v[v1];
 
-        while (iss >> v2)
-            G[v1][v2] = G[v2][v1] = 1;
+        while (iss >> v2) {
+            edges++;
+
+            G[v1][v2] = 1;
+            G[v2][v1] = 1;
+        }
     }
 
     // Extended conflict graph
@@ -37,6 +41,9 @@ Instance::Instance (char* filename) {
         for (v2 = v1+1; v2 < n; v2++)
             if (v[v1] + v[v2] > MAX_COST)
                 G[v1][v2] = G[v2][v1] = 1;
+
+    // Conflict graph density
+    d = static_cast <float> (2 * edges) / (n * (n - 1));
 
     file.close();
 }
@@ -57,6 +64,7 @@ int Instance::operator [] (int i) {
 // Printing the instance description
 void Instance::describe () {
     cout << "Number of items = " << n << endl;
+    cout << "Conflict graph density = " << d << endl;
 
     cout << "v = [ ";
     for (int i = 0; i < n; i++)
