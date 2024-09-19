@@ -6,6 +6,7 @@ class Instance {
         int   n;  // number of items
         int*  v;  // size of items
         int** G;  // conflict graph
+        int   s;  // minimum item size
         float d;  // conflict graph density
 
         Instance (char* filename);

@@ -8,7 +8,7 @@ using namespace std;
 
 // Reading an instance from a file
 Instance::Instance (char* filename) {
-    int v1, v2, edges = 0;
+    int e, v1, v2;
     string line;
     ifstream file(filename);
 
@@ -22,14 +22,22 @@ Instance::Instance (char* filename) {
     // Getting the following data:
     // Weight of items
     // Incompatibilities between items
+    e = 0;
+    s = MAX_COST;
+
+    getline(file, line);
+
     while (getline(file, line)) {
         istringstream iss(line);
 
         iss >> v1;
         iss >> v[v1];
 
+        if (v[v1] < s)
+            s = v[v1];
+
         while (iss >> v2) {
-            edges++;
+            e++;
 
             G[v1][v2] = 1;
             G[v2][v1] = 1;
@@ -43,7 +51,7 @@ Instance::Instance (char* filename) {
                 G[v1][v2] = G[v2][v1] = 1;
 
     // Conflict graph density
-    d = static_cast <float> (2 * edges) / (n * (n - 1));
+    d = static_cast <float> (2 * e) / (n * (n - 1));
 
     file.close();
 }
@@ -63,7 +71,8 @@ int Instance::operator [] (int i) {
 
 // Printing the instance description
 void Instance::describe () {
-    cout << "Number of items = " << n << endl;
+    cout << "Number of items   = " << n << endl;
+    cout << "Minimum item size = " << s << endl;
     cout << "Conflict graph density = " << d << endl;
 
     cout << "v = [ ";
