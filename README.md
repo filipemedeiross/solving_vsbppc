@@ -176,6 +176,14 @@ However, for the problem at hand, the order of the bins is not important; we onl
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/erase_bin.png?raw=true" width="400" height="150">
 </p>
 
+## Large Neighborhood Search Algorithm
+
+## Intelligence-Guided Constructive Heuristics
+
+## Local Search
+
+## Destroying a Solution
+
 ## References
 
 Cabral, Lucídio dos Anjos Formiga. **Introdução à Pesquisa Operacional**. UFPB/CCEN/DE, Julho 1996.
