@@ -41,9 +41,9 @@ void Greedy::set_hc () {
     else if (instance->d > 0.35)
         p = 0.0;
     else if (instance->s > 10.5)
-        p = 0.37;
+        p = 0.0;
     else
-        p = 0.75;
+        p = 0.1;
 
     hc = get_prob() < p;
 }
