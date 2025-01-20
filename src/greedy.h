@@ -17,12 +17,12 @@ using namespace std;
  ***********************************************************************************/
 class Greedy {
     private:
-        float p;
+        int hc;
         mt19937 gen;
         uniform_real_distribution<> dis;
 
         void  set_news();
-        void  set_prob();
+        void  set_hc  ();
         float get_prob();
 
     public:

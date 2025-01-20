@@ -10,7 +10,7 @@ Greedy::Greedy (Instance* new_instance) : dis(0.0, 1.0),
                                           new_type(new int  [new_instance->n]),
                                           new_cost(new float[new_instance->n]) {
     set_news();
-    set_prob();
+    set_hc  ();
 }
 
 Greedy::~Greedy () {
@@ -33,7 +33,9 @@ void Greedy::set_news () {
     }
 }
 
-void Greedy::set_prob () {
+void Greedy::set_hc () {
+    float p;
+
     if (instance->s > 35)
         p = 1.0;
     else if (instance->d > 0.35)
@@ -42,6 +44,8 @@ void Greedy::set_prob () {
         p = 0.37;
     else
         p = 0.75;
+
+    hc = get_prob() < p;
 }
 
 float Greedy::get_prob () {
@@ -74,8 +78,8 @@ void Greedy::greedy_solution (Solution& sol, vector <int>& V, int n) {
     int it, i, t, k, item;
     float (Greedy::*cb) (int, int, Bin&);
 
-    cb = get_prob() < p ? &Greedy::greedy2 :
-                          &Greedy::greedy1;
+    cb = hc ? &Greedy::greedy2 :
+              &Greedy::greedy1;
 
     for (it = 0; it < n; it++) {
         find_best(sol, V, i, t, k, MAX_COST, cb);
