@@ -18,12 +18,9 @@ using namespace std;
 class Greedy {
     private:
         int hc;
-        mt19937 gen;
-        uniform_real_distribution<> dis;
 
         void  set_news();
         void  set_hc  ();
-        float get_prob();
 
     public:
         int*   new_type;

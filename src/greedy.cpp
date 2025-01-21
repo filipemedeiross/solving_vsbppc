@@ -4,9 +4,7 @@
 
 using namespace std;
 
-Greedy::Greedy (Instance* new_instance) : dis(0.0, 1.0),
-                                          gen(random_device{}()),
-                                          instance(new_instance),
+Greedy::Greedy (Instance* new_instance) : instance(new_instance),
                                           new_type(new int  [new_instance->n]),
                                           new_cost(new float[new_instance->n]) {
     set_news();
@@ -34,22 +32,14 @@ void Greedy::set_news () {
 }
 
 void Greedy::set_hc () {
-    float p;
-
     if (instance->s > 35)
-        p = 1.0;
+        hc = 1;
     else if (instance->d > 0.35)
-        p = 0.0;
+        hc = 0;
     else if (instance->s > 10.5)
-        p = 0.0;
+        hc = 0;
     else
-        p = 0.1;
-
-    hc = get_prob() < p;
-}
-
-float Greedy::get_prob () {
-    return dis(gen);
+        hc = 1;
 }
 
 Solution* Greedy::initial_solution () {
