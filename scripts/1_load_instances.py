@@ -8,27 +8,20 @@ import urllib.request
 from pathlib     import Path
 from collections import defaultdict
 
-from .constants import ITEM_COUNTS     , \
-                       SIZE_INTERVALS  , \
-                       DENSITY_VALUES  , \
-                       INSTANCE_PATTERN, \
+from .constants import INSTANCE_PATTERN, \
                        VSBPPC_INSTANCES
 
 
 class DataLoader:
     def __init__(self):
+        self.instance_pattern = INSTANCE_PATTERN
+
         self.urls = VSBPPC_INSTANCES
 
         self.base_dir  = Path('instances')
         self.train_dir = self.base_dir / 'train'
         self.test_dir  = self.base_dir / 'test'
         self.temp_dir  = Path('temp')
-
-        self.instance_pattern = INSTANCE_PATTERN
-
-        self.item_counts    = ITEM_COUNTS
-        self.size_intervals = SIZE_INTERVALS
-        self.density_values = DENSITY_VALUES
 
     def create_directories(self):
         print("Creating directories...")
