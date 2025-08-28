@@ -18,7 +18,7 @@ Where:
 
 ### How to Obtain the Instances
 
-The instances are automatically downloaded and organized by the script `scripts/1_load_instances.py. To download and organize the instances, run:
+The instances are automatically downloaded and organized by the script `scripts/1_load_instances.py`. To download and organize the instances, run:
 
 ```bash
 python3 -m scripts.1_load_instances
