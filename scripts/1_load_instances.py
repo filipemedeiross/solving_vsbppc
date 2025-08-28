@@ -109,24 +109,6 @@ class DataLoader:
             self.move_files(self.temp_dir, files[ :8], self.train_dir)
             self.move_files(self.temp_dir, files[8: ], self.test_dir )
 
-        print(f"✓ Files in train:")
-        print(
-            '\n'.join(
-                f.name
-                for f in self.train_dir.glob('*.txt')
-            )
-        )
-
-        print()
-
-        print("Files in test:")
-        print(
-            '\n'.join(
-                f.name
-                for f in self.test_dir.glob('*.txt')
-            )
-        )
-
     def cleanup(self):
         print("Removing temporary files...")
 
