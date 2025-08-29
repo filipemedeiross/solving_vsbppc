@@ -9,7 +9,7 @@ using namespace std;
 // Reading an instance from a file
 Instance::Instance (char* filename) {
     int e, v1, v2;
-    string line;
+    string   line;
     ifstream file(filename);
 
     file >> n;
@@ -31,6 +31,7 @@ Instance::Instance (char* filename) {
         istringstream iss(line);
 
         iss >> v1;
+        v1--;
         iss >> v[v1];
 
         if (v[v1] < s)
@@ -38,6 +39,7 @@ Instance::Instance (char* filename) {
 
         while (iss >> v2) {
             e++;
+            v2--;
 
             G[v1][v2] = 1;
             G[v2][v1] = 1;
@@ -65,8 +67,16 @@ Instance::~Instance () {
     delete[] G;
 }
 
+int Instance::size () {
+    return n;
+}
+
 int Instance::operator [] (int i) {
     return v[i];
+}
+
+int Instance::operator () (int x, int y) {
+    return G[x][y];
 }
 
 // Printing the instance description

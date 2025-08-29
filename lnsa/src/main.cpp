@@ -59,6 +59,10 @@ int main (int argc, char** argv) {
     cout << "Final solution:" << endl;
     best_solution->describe();
 
+    cout << endl;
+    cout << greedy_solution->obj << endl;
+    cout << best_solution->obj   << endl;
+
     delete greedy_solution;
     delete best_solution;
 

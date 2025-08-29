@@ -14,7 +14,7 @@ Solution* lnsa (Instance& instance, int patience, int verbose, float p) {
 
     vector <int>* V;
     Greedy greedy = Greedy (&instance);
-    Solution *sol, *best = new Solution (instance.n);
+    Solution *sol, *best = new Solution (instance.size());
 
     sol = greedy.initial_solution();
     while (search(*sol, sol->n, v, G));

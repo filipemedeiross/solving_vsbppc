@@ -2,7 +2,7 @@
 CPPC = g++
 
 TARGET_EXEC   := vsbppc
-SRC_DIRS      := src
+SRC_DIRS      := lnsa/src
 BUILD_DIR     := build
 INSTANCE_DIRS := instances/train
 
