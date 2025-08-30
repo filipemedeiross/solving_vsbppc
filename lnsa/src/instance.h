@@ -10,7 +10,7 @@ class Instance {
         int   s;  // minimum item size
         float d;  // conflict graph density
 
-        Instance  (char* filename);
+        Instance  (const char* filename);
         ~Instance ();
 
         int size ();

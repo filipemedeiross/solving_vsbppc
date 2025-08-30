@@ -7,7 +7,7 @@
 using namespace std;
 
 // Reading an instance from a file
-Instance::Instance (char* filename) {
+Instance::Instance (const char* filename) {
     int e, v1, v2;
     string   line;
     ifstream file(filename);
