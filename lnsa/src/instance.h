@@ -14,8 +14,9 @@ class Instance {
         ~Instance ();
 
         int size ();
-        int operator [] (int);
-        int operator () (int, int);
+        int  operator [] (int);
+        int* operator () (int);
+        int  operator () (int, int);
 
         void describe ();
 };

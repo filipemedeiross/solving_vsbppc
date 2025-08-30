@@ -106,6 +106,28 @@ TEST_F (InstanceTest, DensityCalculationTest) {
     EXPECT_LE(instance.d, 1.0);
 }
 
+TEST_F (InstanceTest, ConflictPointerTest) {
+    Instance instance(TEST_FILE);
+
+    int* conflict0 = instance(0);
+    int* conflict1 = instance(1);
+
+    ASSERT_NE(conflict0, nullptr);
+    ASSERT_NE(conflict1, nullptr);
+
+    EXPECT_NE(conflict0, conflict1);
+
+    EXPECT_FALSE(conflict0[0]);
+    EXPECT_TRUE (conflict0[1]);
+    EXPECT_TRUE (conflict0[2]);
+    EXPECT_FALSE(conflict0[3]);
+
+    EXPECT_TRUE (conflict1[0]);
+    EXPECT_FALSE(conflict1[1]);
+    EXPECT_FALSE(conflict1[2]);
+    EXPECT_TRUE (conflict1[3]);
+}
+
 TEST_F (InstanceTest, BoundaryConditionsTest) {
     Instance instance(TEST_FILE);
 

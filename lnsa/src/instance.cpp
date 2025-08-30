@@ -75,7 +75,11 @@ int Instance::operator [] (int i) {
     return v[i];
 }
 
-int Instance::operator () (int x, int y) {
+int* Instance::operator () (int x) {
+    return G[x];
+}
+
+int  Instance::operator () (int x, int y) {
     return G[x][y];
 }
 
