@@ -4,20 +4,26 @@
 #include <list>
 
 class Bin {
+    std::list <int> items;
+
     public:
         int k;  // bin type
         int s;  // capacity used
         int n;  // number of items in the bin
-        std::list <int> items;
 
         Bin (int);
-        ~Bin ();
+        Bin (const Bin&);
 
-        int  is_feasible (int*);
-        int  is_feasible (int*, int);
+        Bin& operator= (const Bin&);
+
+        int is_feasible (int*);
+        int is_feasible (int*, int);
 
         void add    (int, int, int);
         void remove (int, int, int);
+
+        int has_item(int);
+        const std::list <int>& get_items();
 
         void describe (int);
 };

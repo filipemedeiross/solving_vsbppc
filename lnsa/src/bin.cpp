@@ -4,10 +4,28 @@
 
 using namespace std;
 
-Bin::Bin (int type) : k(type), s(0), n(0) {}
+Bin::Bin (int type) :
+    k (type),
+    s (0)   ,
+    n (0)
+{}
 
-Bin::~Bin () {
-    items.clear();
+Bin::Bin (const Bin& other) :
+    k (other.k),
+    s (other.s),
+    n (other.n),
+    items (other.items)
+{}
+
+Bin& Bin::operator= (const Bin& other) {
+    if (this != &other) {
+        k = other.k;
+        s = other.s;
+        n = other.n;
+        items = other.items;
+    }
+
+    return *this;
 }
 
 int Bin::is_feasible(int* conflicts) {
@@ -19,37 +37,49 @@ int Bin::is_feasible(int* conflicts) {
 }
 
 int Bin::is_feasible(int* conflicts, int rm) {
-    for (int item : items) 
-        if (item != rm && conflicts[item])
+    for (int item : items)
+        if (conflicts[item] && item != rm)
             return 0;
 
     return 1;
 }
 
 void Bin::add (int item, int size, int type) {
-    s += size;
     n++;
+    s += size;
+
     items.push_back(item);
 
     k = type;
 }
 
 void Bin::remove (int item, int size, int type) {
-    auto pos = find(items.begin(),
-                    items.end()  ,
-                    item);
+    auto pos = find(
+        items.begin(),
+        items.end()  ,
+        item
+    );
 
-    s -= size;
     n--;
+    s -= size;
+
     items.erase(pos);
 
     k = type;
 }
 
-void Bin::describe (int b) {
-    cout << "Bin " << b << \
-            " ( "  << k << \
-            " - "  << s << \
+int Bin::has_item(int item) {
+    return find(items.begin(), items.end(), item) != items.end();
+}
+
+const std::list <int>& Bin::get_items() {
+    return items;
+}
+
+void Bin::describe (int idx) {
+    cout << "Bin " << idx << \
+            " ( "  << k   << \
+            " - "  << s   << \
             " ) [ ";
 
     for (int item : items)
