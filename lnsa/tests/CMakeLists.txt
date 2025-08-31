@@ -9,9 +9,12 @@ FetchContent_MakeAvailable(googletest)
 
 add_executable(runInstanceTests test_instance.cpp)
 add_executable(runBinTests      test_bin.cpp     )
+add_executable(runSolutionTests test_solution.cpp)
 target_link_libraries(runInstanceTests PRIVATE my_lib gtest_main)
 target_link_libraries(runBinTests      PRIVATE my_lib gtest_main)
+target_link_libraries(runSolutionTests PRIVATE my_lib gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(runInstanceTests)
 gtest_discover_tests(runBinTests     )
+gtest_discover_tests(runSolutionTests)
