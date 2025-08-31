@@ -7,18 +7,19 @@
 using namespace std;
 
 class Solution {
-    public:
-        int   n;  // number of bins
-        int obj;  // objective value
-        Bin** S;  // bins reference
+    int   n;  // number of bins
+    int obj;  // objective value
+    Bin** S;  // bins reference
 
-        Solution (int bins);
+    public:
+        Solution  (int bins);
         ~Solution ();
 
-        Bin* operator []  (int b);
-        void copy (Solution& sol);
+        Bin*      operator [] (int b);
+        Solution& operator =  (Solution& sol);
 
         void clear ();
+
         Bin* new_bin   (int t);
         void erase_bin (int b);
         void reloc_bin (int b, vector <int>* V);
@@ -28,6 +29,8 @@ class Solution {
         int  reinsert (int b1, int b2, int t1, int t2, int i, int s);
         int  swap     (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int s2);
 
+        int  size     ();
+        int  get_obj  ();
         void describe ();
 };
 

@@ -4,12 +4,16 @@
 
 using namespace std;
 
-Solution::Solution (int bins) : n(0), obj(0), S(new Bin*[bins]) {}
+Solution::Solution (int bins) :
+    n   (0),
+    obj (0),
+    S   (new Bin*[bins])
+{}
 
 Solution::~Solution () {
     clear();
 
-    delete S;
+    delete [] S;
 }
 
 Bin* Solution::operator [] (int b) {
@@ -19,22 +23,19 @@ Bin* Solution::operator [] (int b) {
     throw out_of_range("Index out of bounds");
 }
 
-void Solution::copy (Solution& sol) {
-    Bin *bin, *nbin;
+Solution& Solution::operator = (Solution& sol) {
+    if (this != &sol) {
+        clear();
 
-    // Cleaning the bins
-    clear();
+        for (int i = 0; i < sol.size(); i++) {
+            n++;
 
-    // Copying solution 'sol'
-    for (int i = 0; i < sol.n; i++) {
-        bin  = sol[i];
-        nbin = new_bin(bin->k);
-
-        nbin->s = bin->s;
-        nbin->n = bin->n;
-        for (int item : bin->items)
-            nbin->items.push_back(item);
+            S[i] = new Bin (*sol[i]);
+            obj += BIN_SIZE[S[i]->k];
+        }
     }
+
+    return *this;
 }
 
 void Solution::clear () {
@@ -64,13 +65,13 @@ void Solution::erase_bin (int b) {
     delete bin;
 
     if (b != n) {
-        S[b] = S[n];
+        S[b] = S[n]   ;
         S[n] = nullptr;
     }
 }
 
 void Solution::reloc_bin (int b, vector <int>* V) {
-    for (int item : S[b]->items)
+    for (int item : S[b]->get_items())
         V->push_back(item);
 
     erase_bin(b);
@@ -108,10 +109,18 @@ int Solution::swap (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int 
     return i2;
 }
 
+int Solution::size () {
+    return n;
+}
+
+int Solution::get_obj () {
+    return obj;
+}
+
 void Solution::describe () {
     cout << "Objective value = " << obj << endl;
 
-    // Displays non-empty bins
+    // Displaying non-empty bins
     for (int i = 0; i < n; i++)
         S[i]->describe(i);
 }
