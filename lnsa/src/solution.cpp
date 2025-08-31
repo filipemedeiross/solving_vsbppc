@@ -1,13 +1,13 @@
 #include <iostream>
 #include "solution.h"
-#include "constants.h"
 
 using namespace std;
 
-Solution::Solution (int bins) :
-    n   (0),
-    obj (0),
-    S   (new Bin*[bins])
+Solution::Solution (int bins, const int* costs) :
+    n              (0),
+    obj            (0),
+    bin_costs  (costs),
+    S (new Bin*[bins])
 {}
 
 Solution::~Solution () {
@@ -30,8 +30,8 @@ Solution& Solution::operator = (Solution& sol) {
         for (int i = 0; i < sol.size(); i++) {
             n++;
 
-            S[i] = new Bin (*sol[i]);
-            obj += BIN_SIZE[S[i]->k];
+            S[i] =  new Bin (*sol[i]);
+            obj += bin_costs[S[i]->k];
         }
     }
 
@@ -41,7 +41,7 @@ Solution& Solution::operator = (Solution& sol) {
 void Solution::clear () {
     while (n) {
         n--;
-        obj -= BIN_SIZE[S[n]->k];
+        obj -= bin_costs[S[n]->k];
 
         delete S[n];
     }
@@ -51,7 +51,7 @@ Bin* Solution::new_bin (int t) {
     Bin* last = S[n] = new Bin(t);
 
     n++;
-    obj += BIN_SIZE[t];
+    obj += bin_costs[t];
 
     return last;
 }
@@ -60,7 +60,7 @@ void Solution::erase_bin (int b) {
     Bin* bin = S[b];
 
     n--;
-    obj -= BIN_SIZE[bin->k];
+    obj -= bin_costs[bin->k];
 
     delete bin;
 
@@ -81,7 +81,7 @@ void Solution::alloc (int b, int t, int i, int s) {
     int k = S[b]->k;
 
     if (t != k)
-        obj += BIN_SIZE[t] - BIN_SIZE[k];
+        obj += bin_costs[t] - bin_costs[k];
 
     S[b]->add(i, s, t);
 }
@@ -90,7 +90,7 @@ void Solution::dealloc (int b, int t, int i, int s) {
     int k = S[b]->k;
 
     if (t != k)
-        obj -= BIN_SIZE[k] - BIN_SIZE[t];
+        obj -= bin_costs[k] - bin_costs[t];
 
     S[b]->remove(i, s, t);
 }

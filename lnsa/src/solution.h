@@ -7,12 +7,14 @@
 using namespace std;
 
 class Solution {
-    int   n;  // number of bins
-    int obj;  // objective value
+    int   n;
+    int obj;
+    const int* bin_costs;
+
     Bin** S;  // bins reference
 
     public:
-        Solution  (int bins);
+        Solution  (int bins, const int* costs);
         ~Solution ();
 
         Bin*      operator [] (int b);
