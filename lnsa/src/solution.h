@@ -22,9 +22,10 @@ class Solution {
 
         void clear ();
 
-        Bin* new_bin   (int t);
-        void erase_bin (int b);
-        void reloc_bin (int b, vector <int>* V);
+        Bin* new_bin    (int t);
+        void erase_bin  (int b);
+        void adjust_bin (int b, int t);
+        void reloc_bin  (int b, vector <int>* V);
 
         void alloc    (int b, int t, int i, int s);
         void dealloc  (int b, int t, int i, int s);
