@@ -98,6 +98,15 @@ TEST_F (SolutionTest, AllocTest) {
     EXPECT_TRUE(bin->has_item(5));
 }
 
+TEST_F (SolutionTest, AllocNewBinTest) {
+    Solution solution(5, TEST_BIN_COSTS);
+
+    solution.alloc(0, 2, 5, 30);
+
+    ASSERT_EQ(solution.size   (),   1);
+    ASSERT_EQ(solution.get_obj(), 100);
+}
+
 TEST_F (SolutionTest, DeallocTest) {
     Bin* bin;
     Solution solution(5, TEST_BIN_COSTS);
