@@ -71,6 +71,19 @@ TEST_F (BinTest, IsFeasible) {
     EXPECT_FALSE(b.is_feasible(conflicts2));
 }
 
+TEST_F (BinTest, IsFeasibleWithCapacity) {
+    int conflicts[5] = {};
+
+    Bin b(1);
+
+    b.add(0, 10, 2);
+    b.add(2, 15, 2);
+
+    EXPECT_TRUE (b.is_feasible( 5, 35, conflicts));
+    EXPECT_TRUE (b.is_feasible(10, 35, conflicts));
+    EXPECT_FALSE(b.is_feasible(15, 35, conflicts));
+}
+
 TEST_F (BinTest, IsFeasibleWithRemoval) {
     int conflicts[5] = {0, 1, 1};
 

@@ -18,6 +18,7 @@ class Bin {
 
         int is_feasible (int*);
         int is_feasible (int*, int);
+        int is_feasible (int , int, int*);
 
         void add    (int, int, int);
         void remove (int, int, int);
