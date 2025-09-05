@@ -4,25 +4,25 @@
 using namespace std;
 
 
-float greedy1 (int item, int k, Bin& bin, Instance& instance, const int* bin_costs) {
+float greedy1 (int v, int k, Bin& bin, const int* costs) {
     if (k == bin.k)
-        return (float) 0.1 * (1 - (instance[item] + bin.s) / bin_costs[k]);
+        return 0.1f * (1.0f - (float) (v + bin.s) /
+                              (float)  costs[k] );
 
-    return (float) (bin_costs[k] - bin_costs[bin.k]) / instance[item];
+    return (float) (costs[k] - costs[bin.k]) /
+           (float)  v;
 }
 
-float greedy2 (int item, int k, Bin& bin, Instance& instance, const int* bin_costs) {
-    return (float) bin_costs[k] / (instance[item] + bin.s);
+float greedy2 (int v, int k, Bin& bin, const int* costs) {
+    return (float)  costs[k] /
+           (float) (v + bin.s);
 }
 
-GreedyF chooser_legacy (Instance& instance) {
-    if      (instance.s >   35)
-        return greedy2;
-    else if (instance.d > 0.35)
-        return greedy1;
-    else if (instance.s > 10.5)
-        return greedy1;
-    else
+GreedyF chooser_greedy1 (Instance& instance) {
+    return greedy1;
+}
+
+GreedyF chooser_greedy2 (Instance& instance) {
         return greedy2;
 }
 
@@ -94,7 +94,7 @@ BestAlloc Greedy::find_best (Solution& sol, vector <int>& V) {
 
             for (k = bin->k; k < bin_types; k++) {
                 if (can_alloc (item, k, *bin)) {
-                    cost = greedy(item, k, *bin, instance, bin_costs);
+                    cost = greedy(instance[item], k, *bin, bin_costs);
 
                     if (cost < best.cost)
                         best(i, t, k, cost);

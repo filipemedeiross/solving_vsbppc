@@ -14,11 +14,15 @@
 #include "solution.h"
 
 
-typedef float   (*GreedyF      ) (int, int, Bin&, Instance&, const int*);
+typedef float   (*GreedyF      ) (int, int, Bin&, const int*);
 typedef GreedyF (*GreedyChooser) (Instance&);
 
 
-extern GreedyF chooser_legacy (Instance&);
+extern float greedy1 (int, int, Bin&, const int*);
+extern float greedy2 (int, int, Bin&, const int*);
+
+extern GreedyF chooser_greedy1 (Instance&);
+extern GreedyF chooser_greedy2 (Instance&);
 
 
 struct BestAlloc {
