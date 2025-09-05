@@ -66,7 +66,11 @@ void Greedy::set_news () {
 }
 
 bool Greedy::can_alloc (int item, int k, Bin& bin) {
-    return bin.is_feasible(instance[item], bin_costs[k], instance(item));
+    return bin.is_feasible(
+        instance[item],
+        bin_costs  [k],
+        instance(item)
+    );
 }
 
 BestAlloc Greedy::find_best (Solution& sol, vector <int>& V) {
