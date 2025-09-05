@@ -23,7 +23,7 @@ GreedyF chooser_greedy1 (Instance& instance) {
 }
 
 GreedyF chooser_greedy2 (Instance& instance) {
-        return greedy2;
+    return greedy2;
 }
 
 
