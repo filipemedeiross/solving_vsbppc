@@ -1,44 +1,65 @@
+/***********************************************************************************
+ * The logic of this greedy algorithm consists of:                                 *
+ * Add a item to each iteration until all the items in V are packed into the bins; *
+ * Choose the unpacked item with the greedy heuristic;                             *
+ * Pack the item into the corresponding bin;                                       *
+ * Satisfying maximum capacity constraints and incompatibility between items.      *
+ ***********************************************************************************/
+
 #ifndef GREEDY_H
 #define GREEDY_H
 
 #include <vector>
-#include <random>
 #include "instance.h"
 #include "solution.h"
 
-using namespace std;
 
-/***********************************************************************************
- * The logic of this greedy algorithm consists of:                                 *
- * Add a item to each iteration until all the items in V are packed into the bins; *
- * Choose the unpacked item with the minimum per unit cost increase;               *
- * Pack the item into the corresponding bin;                                       *
- * Satisfying maximum capacity constraints and incompatibility between items.      *
- ***********************************************************************************/
+typedef float   (*GreedyF      ) (int, int, Bin&, Instance&, const int*);
+typedef GreedyF (*GreedyChooser) (Instance&);
+
+
+extern GreedyF chooser_legacy (Instance&);
+
+
+struct BestAlloc {
+    int i;
+    int t;
+    int k;
+    float cost;
+
+    BestAlloc (                               ) : i(0), t(0), k(0), cost(0.0f) {}
+    BestAlloc (int i, int t, int k, float cost) : i(i), t(t), k(k), cost(cost) {}
+
+    void operator () (int i, int t, int k, float cost) {
+        this->i = i;
+        this->t = t;
+        this->k = k;
+        this->cost = cost;
+    }
+};
+
+
 class Greedy {
     private:
-        int hc;
+        const int  bin_types;
+        const int  max_cost ;
+        const int* bin_costs;
 
-        void  set_news();
-        void  set_hc  ();
-
-    public:
         int*   new_type;
         float* new_cost;
-        Instance* instance;
+        Instance&    instance;
+        GreedyChooser chooser;
 
-        Greedy (Instance*);
+        void      set_news  ();
+        bool      can_alloc (int, int, Bin&);
+        BestAlloc find_best (Solution&, vector <int>&);
+
+    public:
+        Greedy  (Instance&, int, const int*, GreedyChooser);
         ~Greedy ();
 
-        Solution* initial_solution ();
-
-        float greedy1 (int, int, Bin&);
-        float greedy2 (int, int, Bin&);
-
-        void greedy_solution (Solution&, vector <int>&, int);
-        void update_best (int&, int&, int&, float&, int, int, int, float);
-        void find_best   (Solution&, vector <int>&, int&, int&, int&,
-                          float, float (Greedy::*)(int, int, Bin&));
+        Solution initial_solution ();
+        void     greedy_solution  (Solution&, vector <int>&);
 };
 
 #endif

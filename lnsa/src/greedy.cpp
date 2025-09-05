@@ -1,14 +1,48 @@
 #include <numeric>
 #include "greedy.h"
-#include "constants.h"
 
 using namespace std;
 
-Greedy::Greedy (Instance* new_instance) : instance(new_instance),
-                                          new_type(new int  [new_instance->n]),
-                                          new_cost(new float[new_instance->n]) {
+
+float greedy1 (int item, int k, Bin& bin, Instance& instance, const int* bin_costs) {
+    if (k == bin.k)
+        return (float) 0.1 * (1 - (instance[item] + bin.s) / bin_costs[k]);
+
+    return (float) (bin_costs[k] - bin_costs[bin.k]) / instance[item];
+}
+
+float greedy2 (int item, int k, Bin& bin, Instance& instance, const int* bin_costs) {
+    return (float) bin_costs[k] / (instance[item] + bin.s);
+}
+
+GreedyF chooser_legacy (Instance& instance) {
+    if      (instance.s >   35)
+        return greedy2;
+    else if (instance.d > 0.35)
+        return greedy1;
+    else if (instance.s > 10.5)
+        return greedy1;
+    else
+        return greedy2;
+}
+
+
+Greedy::Greedy (
+    Instance&  instance ,
+    int        bin_types,
+    const int* bin_costs,
+    GreedyChooser chooser
+) :
+    bin_types (bin_types),
+    bin_costs (bin_costs),
+    max_cost  (bin_costs[bin_types-1]),
+
+    instance  (instance),
+    chooser   (chooser ),
+    new_type  (new int  [instance.size()]),
+    new_cost  (new float[instance.size()])
+{
     set_news();
-    set_hc  ();
 }
 
 Greedy::~Greedy () {
@@ -17,107 +51,88 @@ Greedy::~Greedy () {
 }
 
 void Greedy::set_news () {
-    int i, k, v;
+    int i, v, k;
 
-    for (i = 0; i < instance->n; i++) {
-        v = instance->v[i];
+    for (i = 0; i < instance.size(); i++) {
+        v = instance[i];
 
         k = 0;
-        while (BIN_SIZE[k] < v)
+        while (bin_costs[k] < v)
             k++;
 
         new_type[i] = k;
-        new_cost[i] = (float) BIN_SIZE[k] / v;
+        new_cost[i] = (float) bin_costs[k] / v;
     }
 }
 
-void Greedy::set_hc () {
-    if (instance->s > 35)
-        hc = 1;
-    else if (instance->d > 0.35)
-        hc = 0;
-    else if (instance->s > 10.5)
-        hc = 0;
-    else
-        hc = 1;
+bool Greedy::can_alloc (int item, int k, Bin& bin) {
+    return bin.is_feasible(instance[item], bin_costs[k], instance(item));
 }
 
-Solution* Greedy::initial_solution () {
-    Solution* solution = new Solution (instance->n);
+BestAlloc Greedy::find_best (Solution& sol, vector <int>& V) {
+    int i, t, k;
+    int item, size;
+    float cost;
 
-    vector <int> V (instance->n);
-    iota(V.begin(), V.end(), 0 );
-
-    greedy_solution (*solution, V, V.size());
-
-    return solution;
-}
-
-float Greedy::greedy1 (int item, int k, Bin& bin) {
-    if (k == bin.k)
-        return (float) 0.1 * (1 - (instance->v[item] + bin.s) / BIN_SIZE[k]);
-
-    return (float) (BIN_SIZE[k] - BIN_SIZE[bin.k]) / instance->v[item];
-}
-
-float Greedy::greedy2 (int item, int k, Bin& bin) {
-    return (float) BIN_SIZE[k] / (instance->v[item] + bin.s);
-}
-
-void Greedy::greedy_solution (Solution& sol, vector <int>& V, int n) {
-    int it, i, t, k, item;
-    float (Greedy::*cb) (int, int, Bin&);
-
-    cb = hc ? &Greedy::greedy2 :
-              &Greedy::greedy1;
-
-    for (it = 0; it < n; it++) {
-        find_best(sol, V, i, t, k, MAX_COST, cb);
-
-        if (t == sol.n)
-            sol.new_bin(k);
-
-        item = V.at(i);
-        sol.alloc(t, k, item, instance->v[item]);
-
-        V.erase(V.begin() + i);
-    }
-}
-
-void Greedy::update_best (int& i, int& t, int& k, float& cost,
-                          int _i, int _t, int _k, float _cost) {
-    i = _i;
-    t = _t;
-    k = _k;
-    cost = _cost;
-}
-
-void Greedy::find_best (Solution& sol, vector <int>& V, int& bi, int& bt, int& bk, float cost, float (Greedy::*cb)(int, int, Bin&)) {
     Bin* bin;
-    int i, t, k, item;
-    int size = V.size();
-    float bcost =  cost;
+    BestAlloc best;
+    GreedyF   greedy = chooser(instance);
+
+    size = V.size();
+    best.cost = max_cost;
+    cost      = max_cost;
 
     for (i = 0; i < size; i++) {
         item = V.at(i);
 
-        for (t = 0; t < sol.n; t++) {
+        for (t = 0; t < sol.size(); t++) {
             bin = sol[t];
 
-            for (k = bin->k; k < BIN_TYPES; k++) {
-                if (instance->v[item] + bin->s <= BIN_SIZE[k] && bin->is_feasible(instance->G[item])) {
-                    cost = (this->*cb)(item, k, *bin);
+            for (k = bin->k; k < bin_types; k++) {
+                if (can_alloc (item, k, *bin)) {
+                    cost = greedy(item, k, *bin, instance, bin_costs);
 
-                    if (cost < bcost)
-                        update_best(bi, bt, bk, bcost,
-                                    i , t , k , cost );
+                    if (cost < best.cost)
+                        best(i, t, k, cost);
+
                     break;
                 }
             }
         }
 
-        if (new_cost[item] < bcost)
-            update_best(bi, bt, bk, bcost,
-                        i , sol.n, new_type[item], new_cost[item]);
+        if (new_cost[item] < best.cost)
+            best(i, sol.size(), new_type[item], new_cost[item]);
+    }
+
+    return best;
+}
+
+Solution Greedy::initial_solution () {
+    vector <int> V    (instance.size());
+    Solution solution (instance.size(), bin_costs);
+
+    iota (V.begin(), V.end(),  0);
+    greedy_solution (solution, V);
+
+    return solution;
+}
+
+void Greedy::greedy_solution (Solution& sol, vector <int>& V) {
+    int item;
+    BestAlloc best;
+
+    while (!V.empty()) {
+        best = find_best(sol, V);
+
+        item = V.at(best.i);
+        sol.alloc(
+            best.t,
+            best.k,
+            item  ,
+            instance[item]
+        );
+
+        swap(V[best.i], V.back());
+        V.pop_back();
     }
 }
