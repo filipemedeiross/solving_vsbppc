@@ -48,6 +48,10 @@ int Bin::is_feasible(int v, int max, int* conflicts) {
     return s + v <= max && is_feasible(conflicts);
 }
 
+int Bin::is_feasible(int v1, int v2, int max, int* conflicts, int rm) {
+    return s - v1 + v2 <= max && is_feasible(conflicts, rm);
+}
+
 void Bin::add (int item, int size, int type) {
     n++;
     s += size;
