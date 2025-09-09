@@ -29,6 +29,9 @@ int max_gap (Solution& sol) {
 }
 
 float prob_weight (Bin& bin, int max_gap) {
+    if (!max_gap)
+        return 0.1f;
+
     int   free = BIN_SIZE[bin.k] - bin.s;
     float coef = (float)  free / max_gap;
 

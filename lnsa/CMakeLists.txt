@@ -10,6 +10,7 @@ add_library(
     src/solution.cpp
     src/greedy.cpp
     src/neighborhood.cpp
+    src/destroy.cpp
 )
 
 target_include_directories(my_lib PUBLIC src)
