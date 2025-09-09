@@ -64,10 +64,8 @@ void Solution::erase_bin (int b) {
 
     delete bin;
 
-    if (b != n) {
-        S[b] = S[n]   ;
-        S[n] = nullptr;
-    }
+    if (b != n)
+        S[b] = S[n];
 }
 
 void Solution::adjust_bin (int b, int t) {
