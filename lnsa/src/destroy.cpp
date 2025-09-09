@@ -1,17 +1,23 @@
 #include <random>
 #include <cmath>
-#include "tools.h"
 #include "bin.h"
+#include "destroy.h"
 #include "constants.h"
+
+#define WEIGHT 8.74f
+#define OFFSET 1.26f
 
 using namespace std;
 
 int max_gap (Solution& sol) {
+    int n;
+    int gap, max_gap;
     Bin* bin;
-    int i, gap, max_gap;
+
+    n = sol.size();
 
     max_gap = 0;
-    for (i = 0; i < sol.n; i++) {
+    for (int i = 0; i < n; i++) {
         bin = sol[i];
         gap = BIN_SIZE[bin->k] - bin->s;
 
@@ -22,32 +28,28 @@ int max_gap (Solution& sol) {
     return max_gap;
 }
 
-float prob_weight (Bin* bin, int max_gap) {
-    int free;
-    float coef;
+float prob_weight (Bin& bin, int max_gap) {
+    int   free = BIN_SIZE[bin.k] - bin.s;
+    float coef = (float)  free / max_gap;
 
-    free = BIN_SIZE[bin->k] - bin->s;
-    coef = (float) free / max_gap;
-
-    return log10(8.74 * coef + 1.25);
+    return log10f(WEIGHT * coef + OFFSET);
 }
 
 vector <int>* destroy_solution (Solution& sol, float p) {
-    int idx;
-    float w;
+    float  w;
     Bin* bin;
 
     int gap = max_gap(sol);
     vector <int>* V = new vector <int>();
 
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0.0, 1.0);
+    static random_device  rd;
+    static mt19937 gen(rd());
+    static uniform_real_distribution <float> dis(0.0f, 1.0f);
 
-    idx = 0;
-    while (idx < sol.n) {
+    int idx = 0;
+    while (idx < sol.size()) {
         bin = sol[idx];
-        w   = prob_weight(bin, gap);
+        w   = prob_weight(*bin, gap);
 
         if (dis(gen) < p * w)
             sol.reloc_bin(idx, V);
