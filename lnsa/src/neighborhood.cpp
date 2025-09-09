@@ -11,8 +11,8 @@ vector <int> vector_shuffled (int n) {
 
     iota(V.begin(), V.end(), 0);
 
-    random_device rd;
-    mt19937 g(rd());
+    static random_device rd;
+    static mt19937  g(rd());
     shuffle(V.begin(), V.end(), g);
 
     return V;

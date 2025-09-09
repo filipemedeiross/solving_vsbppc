@@ -4,8 +4,9 @@
 #include "instance.h"
 #include "solution.h"
 
-int best_k (int);
+std::vector <int> vector_shuffled (int);
 
+int best_k (int);
 int is_feasible (Bin*,       int, int,           Instance&);
 int is_feasible (Bin*, Bin*, int, int, int, int, Instance&);
 
