@@ -38,6 +38,27 @@ const char* NeighborhoodTest::TEST_FILE = "test_neighborhood_instance.txt";
 const int   NeighborhoodTest::TEST_BIN_COSTS[5] = {60, 80, 100, 120, 150} ;
 
 
+TEST_F (NeighborhoodTest, VectorShuffledGeneratesDifferentOrder) {
+    const int n = 100;
+
+    vector <int> result1 = vector_shuffled(n);
+    vector <int> result2 = vector_shuffled(n);
+
+    EXPECT_TRUE(result1 != result2) << "vector_shuffled should generate different permutations";
+}
+
+TEST_F (NeighborhoodTest, VectorShuffledIsLimitated) {
+    const int n = 5;
+    vector<int> shuffled = vector_shuffled(n);
+
+    for (int elem : shuffled) {
+        EXPECT_GE(elem, 0) << "All elements should be non-negative";
+        EXPECT_LT(elem, n) << "All elements should be less than n" ;
+    }
+
+    EXPECT_EQ(shuffled.size(), n) << "Shuffled vector should have size n";
+}
+
 TEST_F (NeighborhoodTest, BestKReturnsCorrectIndex) {
     EXPECT_EQ(best_k(1)  , 0);
     EXPECT_EQ(best_k(59) , 0);
