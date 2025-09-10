@@ -4,9 +4,11 @@
 using namespace std;
 
 Solution::Solution (int bins, const int* costs) :
-    n              (0),
-    obj            (0),
+    n      (0),
+    c   (bins),
+    obj    (0),
     bin_costs  (costs),
+
     S (new Bin*[bins])
 {}
 
@@ -21,6 +23,18 @@ Bin* Solution::operator [] (int b) {
         return S[b];
 
     throw out_of_range("Index out of bounds");
+}
+
+Solution::Solution (Solution& sol) :
+    n                  (sol.n),
+    c         (sol.capacity()),
+    obj              (sol.obj),
+    bin_costs  (sol.bin_costs),
+
+    S (new Bin*[sol.capacity()])
+{
+    for (int i = 0; i < sol.size(); i++)
+        S[i] = new Bin(*sol.S[i]);
 }
 
 Solution& Solution::operator = (Solution& sol) {
@@ -114,15 +128,19 @@ int Solution::swap (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int 
     return i2;
 }
 
-int Solution::size () {
+int  Solution::size     () const {
     return n;
 }
 
-int Solution::get_obj () {
+int  Solution::capacity () const {
+    return c;
+}
+
+int  Solution::get_obj  () const {
     return obj;
 }
 
-void Solution::describe () {
+void Solution::describe () const {
     cout << "Objective value = " << obj << endl;
 
     // Displaying non-empty bins

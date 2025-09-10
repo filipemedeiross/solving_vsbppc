@@ -8,6 +8,7 @@ using namespace std;
 
 class Solution {
     int   n;
+    int   c;
     int obj;
     const int* bin_costs;
 
@@ -15,6 +16,7 @@ class Solution {
 
     public:
         Solution  (int bins, const int* costs);
+        Solution  (Solution&);
         ~Solution ();
 
         Bin*      operator [] (int b);
@@ -32,9 +34,10 @@ class Solution {
         int  reinsert (int b1, int b2, int t1, int t2, int i, int s);
         int  swap     (int b1, int b2, int t1, int t2, int i1, int i2, int s1, int s2);
 
-        int  size     ();
-        int  get_obj  ();
-        void describe ();
+        int  size     () const;
+        int  capacity () const;
+        int  get_obj  () const;
+        void describe () const;
 };
 
 #endif
