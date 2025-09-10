@@ -11,6 +11,7 @@ add_library(
     src/greedy.cpp
     src/neighborhood.cpp
     src/destroy.cpp
+    src/lnsa.cpp
 )
 
 target_include_directories(my_lib PUBLIC src)
