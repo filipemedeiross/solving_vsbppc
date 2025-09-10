@@ -27,12 +27,12 @@ Solution& Solution::operator = (Solution& sol) {
     if (this != &sol) {
         clear();
 
-        for (int i = 0; i < sol.size(); i++) {
-            n++;
+        n         = sol.n  ;
+        obj       = sol.obj;
+        bin_costs = sol.bin_costs;
 
+        for (int i = 0; i < sol.size(); i++)
             S[i] =  new Bin (*sol[i]);
-            obj += bin_costs[S[i]->k];
-        }
     }
 
     return *this;
