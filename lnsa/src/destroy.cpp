@@ -9,6 +9,12 @@
 
 using namespace std;
 
+namespace {
+    random_device  rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<float> dis(0.0f, 1.0f);
+}
+
 int max_gap (Solution& sol) {
     int n;
     int gap, max_gap;
@@ -21,8 +27,7 @@ int max_gap (Solution& sol) {
         bin = sol[i];
         gap = BIN_SIZE[bin->k] - bin->s;
 
-        if (max_gap < gap)
-            max_gap = gap;
+        max_gap = max(max_gap, gap);
     }
 
     return max_gap;
@@ -38,24 +43,19 @@ float prob_weight (Bin& bin, int max_gap) {
     return log10f(WEIGHT * coef + OFFSET);
 }
 
-vector <int>* destroy_solution (Solution& sol, float p) {
+vector <int> destroy_solution (Solution& sol, float p) {
     float  w;
     Bin* bin;
-
-    int gap = max_gap(sol);
-    vector <int>* V = new vector <int>();
-
-    static random_device  rd;
-    static mt19937 gen(rd());
-    static uniform_real_distribution <float> dis(0.0f, 1.0f);
+    vector <int> V;
 
     int idx = 0;
+    int gap = max_gap(sol);
     while (idx < sol.size()) {
         bin = sol[idx];
         w   = prob_weight(*bin, gap);
 
         if (dis(gen) < p * w)
-            sol.reloc_bin(idx, V);
+            sol.reloc_bin(idx, &V);
         else
             idx++;
     }

@@ -85,12 +85,10 @@ TEST_F (DestroyTest, ProbWeightMaxGap) {
 TEST_F (DestroyTest, DestroySolutionEmptySolution) {
     Solution solution(5, TEST_BIN_COSTS);
 
-    vector <int>* result = destroy_solution(solution, 0.5f);
+    vector <int> result = destroy_solution(solution, 0.5f);
 
     EXPECT_EQ(solution.size(), 0);
-    EXPECT_EQ(result ->size(), 0);
-
-    delete result;
+    EXPECT_EQ(result  .size(), 0);
 }
 
 TEST_F (DestroyTest, DestroySolutionZeroProbability) {
@@ -100,12 +98,10 @@ TEST_F (DestroyTest, DestroySolutionZeroProbability) {
     Solution solution = greedy.initial_solution();
 
     int size = solution.size();
-    vector <int>* result = destroy_solution(solution, 0.0f);
+    vector <int> result = destroy_solution(solution, 0.0f);
 
-    EXPECT_EQ(result ->size(), 0);
+    EXPECT_EQ(result  .size(), 0   );
     EXPECT_EQ(solution.size(), size);
-
-    delete result;
 }
 
 TEST_F (DestroyTest, DestroySolutionFullProbability) {
@@ -115,12 +111,10 @@ TEST_F (DestroyTest, DestroySolutionFullProbability) {
     Solution solution = greedy.initial_solution();
 
     int size = solution.size();
-    vector <int>* result = destroy_solution(solution, 1.0f);
+    vector <int> result = destroy_solution(solution, 1.0f);
 
-    EXPECT_GE(result ->size(), 0);
+    EXPECT_GE(result  .size(), 0   );
     EXPECT_LE(solution.size(), size);
-
-    delete result;
 }
 
 TEST_F (DestroyTest, DestroySolutionWeightedProbability) {
@@ -131,11 +125,9 @@ TEST_F (DestroyTest, DestroySolutionWeightedProbability) {
     solution.alloc(0, 0, 1, 10);
     solution.alloc(1, 2, 2, 90);
 
-    vector <int>* result = destroy_solution(solution, 0.8f);
+    vector <int> result = destroy_solution(solution, 0.8f);
 
-    EXPECT_GE(result ->size(), 0);
-    EXPECT_LE(result ->size(), 2);
-    EXPECT_EQ(solution.size(), 2 - result->size());
-
-    delete result;
+    EXPECT_GE(result  .size(), 0);
+    EXPECT_LE(result  .size(), 2);
+    EXPECT_EQ(solution.size(), 2 - result.size());
 }
