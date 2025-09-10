@@ -1,49 +1,40 @@
 #include <iostream>
 #include <vector>
 #include "greedy.h"
-#include "nghbr.h"
-#include "tools.h"
+#include "neighborhood.h"
+#include "destroy.h"
 #include "lnsa.h"
+#include "constants.h"
 
 using namespace std;
 
-Solution* lnsa (Instance& instance, int patience, int verbose, float p) {
-    int iter;
-    int*  v = instance.v;
-    int** G = instance.G;
+Solution lnsa (Instance& instance, int patience, float p, GreedyChooser g, int verbose) {
+    Greedy   greedy = Greedy (instance, BIN_TYPES, BIN_SIZE, g);
+    Solution sol    = greedy.initial_solution();
 
-    vector <int>* V;
-    Greedy greedy = Greedy (&instance);
-    Solution *sol, *best = new Solution (instance.size());
+    while (search(sol, instance));
 
-    sol = greedy.initial_solution();
-    while (search(*sol, sol->n, v, G));
-
-    best->copy(*sol);
+    Solution best = sol;
     if (verbose)
-        cout << "Initial solution = " << best->obj << endl;
+        cout << "Initial solution = " << best.get_obj() << endl;
 
-    iter = 0;
+    int iter = 0;
     while (iter <= patience) {
-        V = destroy_solution(*sol, p);
+        vector <int> V = destroy_solution(sol, p);
 
-        greedy.greedy_solution(*sol, *V, V->size());
-        while (search(*sol, sol->n, v, G));
+        greedy.greedy_solution(sol, V);
+        while  (search(sol, instance));
 
-        if (sol->obj < best->obj) {
-            iter = 0;
+        if (sol.get_obj() < best.get_obj()) {
+            iter =   0;
+            best = sol;
 
-            best->copy(*sol);
             if (verbose)
-                cout << "Solution = " << best->obj << endl;
-        } else {
-            iter++;
+                cout << "Solution = " << best.get_obj() << endl;
         }
-
-        delete V;
+        else
+            iter++;
     }
-
-    delete sol;
 
     return best;
 }
