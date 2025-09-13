@@ -28,11 +28,42 @@ run_all: $(INSTANCES) $(TARGET_EXEC)
 		echo "";                                            \
 		echo "***Running $$INSTANCE_PART***";               \
 		if [ -z "$(OUTPUT_FILE)" ]; then                    \
-		    /$(TARGET_EXEC) "$$instance";                   \
+		    ./$(TARGET_EXEC) "$$instance";                  \
 		else                                                \
 		    ./$(TARGET_EXEC) "$$instance" "$(OUTPUT_FILE)"; \
 		fi;                                                 \
 	done
+
+test: $(TARGET_EXEC)
+	@echo "===> [TEST 1] Run without instance (expected to fail)"
+
+	@if ./$(TARGET_EXEC) ; then                                         \
+		echo "[ERROR]: program should fail without instance!"; exit 1;  \
+	else                                                                \
+	    echo "[SUCCESS]: failed without instance.";                     \
+	fi
+
+	@echo ""
+	@echo "===> [TEST 2] Run with a random instance (Correia_Random_[1|2])"
+
+	@INSTANCE=$$(ls $(INSTANCE_DIRS)/*Random_[12]*.txt | shuf -n 1); \
+	 echo "Using : $$(basename $$INSTANCE .txt)";                    \
+	if ./$(TARGET_EXEC) "$$INSTANCE" > /dev/null 2>&1 ; then         \
+	    echo "[SUCCESS] ran with instance.";                         \
+	else                                                             \
+	    echo "[ERROR]: failed running with instance."; exit 1;       \
+	fi
+
+	@echo ""
+	@echo "===> [TEST 3] Run with parameters (Correia_Random_[1|2])"
+
+	@INSTANCE=$$(ls $(INSTANCE_DIRS)/*Random_[12]*.txt | shuf -n 1);             \
+	 echo "Using: $$(basename $$INSTANCE .txt)";                                 \
+	if ./$(TARGET_EXEC) "$$INSTANCE" -pa 50 -v 1 -p 0.5 > /dev/null 2>&1 ; then  \
+	    echo "[SUCCESS] ran with parameters.";                                   \
+	else                                                                         \
+	    echo "[ERROR]: failed running with parameters."; exit 1;                 \
+	fi
 
 clean:
 	rm -f $(TARGET_EXEC) $(OBJS)
