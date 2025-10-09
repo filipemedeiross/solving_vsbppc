@@ -251,18 +251,13 @@ ctest
 
 This will automatically discover and execute all test cases for:
 
-* Instance handling
-* Bin operations
-* Solution structure
-* Greedy initialization
-* Neighborhood generation
-* Destroy and LNSA modules
-
-## Reference Implementation and Article
-
-For a detailed description of the algorithmic strategies, including the **Intelligence-Guided Constructive Heuristics** and **Large Neighborhood Search**, please refer to the full paper published at the **Brazilian Symposium on Operational Research (SBPO)**:
-
-📘 [*Seleção Inteligente de Heurísticas para o VSBPPC: Uma Abordagem Baseada em Árvore de Decisão*](https://github.com/filipemedeiross/solving_vsbppc/blob/main/paper/Sele%C3%A7%C3%A3o%20Inteligente%20de%20Heur%C3%ADsticas%20para%20o%20VSBPPC%20-%20Uma%20Abordagem%20Baseada%20em%20%C3%81rvore%20de%20Decis%C3%A3o.pdf)
+* Instance
+* Bin
+* Solution
+* Greedy
+* Neighborhood
+* Destroy module
+* LNSA
 
 ## References
 
@@ -271,5 +266,12 @@ Cabral, Lucídio dos Anjos Formiga. **Introdução à Pesquisa Operacional**. UF
 Ekici, A. **A Large Neighborhood Search Algorithm and Lower Bounds for the Variable-Sized Bin Packing Problem with Conflicts**. European Journal of Operational Research, vol. 308, pp. 1007-1020, 2023.
 
 Souza, M. J. F. **Inteligência Computacional para Otimização: meta-heurísticas**. Departamento de Computação, Universidade Federal de Ouro Preto, Ouro Preto, Minas Gerais, 2024.
+
+### Article
+
+For a detailed description of the algorithmic strategies, including the **Intelligence-Guided Constructive Heuristics** and **Large Neighborhood Search**, please refer to the full paper published at the **Brazilian Symposium on Operational Research (SBPO)**:
+
+📘 [*Seleção Inteligente de Heurísticas para o VSBPPC: Uma Abordagem Baseada em Árvore de Decisão*](https://github.com/filipemedeiross/solving_vsbppc/blob/main/paper/Sele%C3%A7%C3%A3o%20Inteligente%20de%20Heur%C3%ADsticas%20para%20o%20VSBPPC%20-%20Uma%20Abordagem%20Baseada%20em%20%C3%81rvore%20de%20Decis%C3%A3o.pdf)
+
 
 
