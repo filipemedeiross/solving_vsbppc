@@ -176,13 +176,91 @@ However, for the problem at hand, the order of the bins is not important; we onl
     <img src="https://github.com/filipemedeiross/solving_vsbppc/blob/main/examples/erase_bin.png?raw=true" width="400" height="150">
 </p>
 
-## Large Neighborhood Search Algorithm
+## ⚙️ Building and Running the LNSA
 
-## Intelligence-Guided Constructive Heuristics
+The **Large Neighborhood Search Algorithm (LNSA)** implementation can be compiled and executed using the provided `Makefile`.
 
-## Local Search
+### 🏗️ Build
 
-## Destroying a Solution
+From the project root:
+
+```
+make
+```
+
+This command compiles all C++ files located in `lnsa/src` and produces the executable `vsbppc` in the project root.
+
+### 🧪 Test the Build
+
+You can perform the automated tests defined in the `Makefile`:
+
+```
+make test
+```
+
+These tests include:
+
+* Running without an instance (expected failure)
+* Running with a random instance from `instances/train`
+* Running with additional parameters
+
+### ▶️ Run All Instances
+
+To execute the algorithm on all instances in `instances/train`:
+
+```
+make run_all
+```
+
+You can optionally specify an output file:
+
+```
+make run_all OUTPUT_FILE=results.txt
+```
+
+### 🧹 Clean Build Files
+
+To remove compiled objects and binaries:
+
+```
+make clean
+```
+
+## 🧩 Unit Testing (CMake + GoogleTest)
+
+Unit tests for the LNSA modules are defined in `lnsa/tests/`. The project uses **CMake** with **GoogleTest (v1.14.0)**.
+
+### 🔧 Build the Tests
+
+From the `lnsa/build/` directory:
+
+```
+cmake ..
+cmake --build .
+```
+
+### ▶️ Run All Tests
+
+After building:
+
+```
+ctest
+```
+
+This will automatically discover and execute all test cases for:
+
+* Instance handling
+* Bin operations
+* Solution structure
+* Greedy initialization
+* Neighborhood generation
+* Destroy and LNSA modules
+
+## 📄 Reference Implementation and Article
+
+For a detailed description of the algorithmic strategies, including the **Intelligence-Guided Constructive Heuristics** and **Large Neighborhood Search**, please refer to the full paper published at the **Brazilian Symposium on Operational Research (SBPO)**:
+
+📘 [*Seleção Inteligente de Heurísticas para o VSBPPC: Uma Abordagem Baseada em Árvore de Decisão*](https://github.com/filipemedeiross/solving_vsbppc/blob/main/paper/Sele%C3%A7%C3%A3o%20Inteligente%20de%20Heur%C3%ADsticas%20para%20o%20VSBPPC%20-%20Uma%20Abordagem%20Baseada%20em%20%C3%81rvore%20de%20Decis%C3%A3o.pdf)
 
 ## References
 
@@ -191,3 +269,4 @@ Cabral, Lucídio dos Anjos Formiga. **Introdução à Pesquisa Operacional**. UF
 Ekici, A. **A Large Neighborhood Search Algorithm and Lower Bounds for the Variable-Sized Bin Packing Problem with Conflicts**. European Journal of Operational Research, vol. 308, pp. 1007-1020, 2023.
 
 Souza, M. J. F. **Inteligência Computacional para Otimização: meta-heurísticas**. Departamento de Computação, Universidade Federal de Ouro Preto, Ouro Preto, Minas Gerais, 2024.
+
